@@ -1,0 +1,10 @@
+:host {
+    .form-control {
+     width: unset;
+        margin: 0 2rem;
+    }
+
+    .form-container {
+        display: flex;
+    }
+}

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="well">
+        <h2>Enter a zipcode:</h2>
+        <div class="form-container">
+            <input class="form-control" [(ngModel)]="zipcode" placeholder="Zipcode" type="text" id="addLocation">
+            <button class="btn btn-primary" id="addLocationBtn" (click)="onAddLocation()">
+                Add location
+            </button>
+        </div>
+    </div>
+    <div >
+        <div class="well flex" *ngFor="let currentWeather of weatherList; let i = index;">
+            <div>
+                <h3>{{currentWeather.name}} ({{currentWeather.zipCode}})</h3>
+                <h4>Current conditions: {{currentWeather.weather[0]?.main}}</h4>
+                <h4>Temperatures today:</h4>
+                <p>
+                    Current {{currentWeather.main.temp}}
+                    - Max {{currentWeather.main.temp_max}}
+                    - Min {{currentWeather.main.temp_min}}
+                </p>
+                <p>
+                    <a [routerLink]="'forecast/' + currentWeather.zipCode">Show 5-day forecast for {{currentWeather.name}}</a>
+                </p>
+            </div>
+            <div>
+                <span class="close" (click)="onRemove(currentWeather.zipCode)">×</span>
+                <app-weather-image [weather]="currentWeather.weather[0]?.main"></app-weather-image>
+                <!--<ng-container [ngSwitch]="currentWeather.weather[0]?.main | lowercase">
+                    <img *ngSwitchCase="'clear'" src="https://www.angulartraining.com/images/weather/clouds.png">
+                    <img *ngSwitchCase="'rain'" src="https://www.angulartraining.com/images/weather/rain.png">
+                    <img *ngSwitchCase="'snow'" src="https://www.angulartraining.com/images/weather/snow.png">
+                    <img *ngSwitchDefault src="https://www.angulartraining.com/images/weather/sun.png">
+                </ng-container>-->
+            </div>
+        </div>
+    </div>
+</div>
